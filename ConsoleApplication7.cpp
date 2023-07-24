@@ -40,7 +40,12 @@ std::string toProperCase(const std::string& str) {
 			properStr.push_back(c);
 		}
 
-		else if (tolower(c_1) == 'm' && c = 'c' && c_2 == ' ') {
+		else if (tolower(c_1) == 'm' && c == 'c' && c_2 == ' ') {
+			capitaliseNext = true;
+			properStr.push_back(c);
+		}
+
+		else if (tolower(c_1) == 'o' && c == '\'' && c_2 == ' ') {
 			capitaliseNext = true;
 			properStr.push_back(c);
 		}
@@ -150,6 +155,7 @@ int main() {
 	Book book2("The Two Towers", "J.R.R. Tolkien", 1954);
 	Book book3("The Return of the King", "J.R.R. Tolkien", 1955);
 	Book book4("amSterDaM", "IaN mcEwan", 1998);
+	Book book5("The life of john wayne", "marcus o\'reilly", 2005);
 
 	Library myLibrary;
 
@@ -157,6 +163,7 @@ int main() {
 	myLibrary.addBook(book2);
 	myLibrary.addBook(book3);
 	myLibrary.addBook(book4);
+	myLibrary.addBook(book5);
 	myLibrary.listBooks();
 
 	myLibrary.removeBook("THE FELLOWSHIP OF THE RING");
