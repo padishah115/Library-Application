@@ -17,6 +17,40 @@ std::string toLowerCase(const std::string& str) {
 
 std::string toProperCase(const std::string& str) {
 	std::string properStr;
+	bool capitaliseNext = true;
+	char c_1 = 0;
+	char c_2 = 0;
+
+	for (int i = 0; str[i]; i++) {
+		char c = str[i];
+
+
+		if (i > 1) {
+			c_1 = str[i - 1];
+			c_2 = str[i - 2];
+		}
+		
+		//Capitalise first character
+		if (capitaliseNext && isalpha(c)) {
+			properStr.push_back(toupper(c));
+			capitaliseNext = false;
+		}
+		else if (c == ' ' || c == '.') {
+			capitaliseNext = true;
+			properStr.push_back(c);
+		}
+
+		else if (tolower(c_1) == 'm' && c = 'c' && c_2 == ' ') {
+			capitaliseNext = true;
+			properStr.push_back(c);
+		}
+
+		else {
+			properStr.push_back(tolower(c));
+		}
+		
+
+	}
 
 	return properStr;
 }
@@ -75,8 +109,14 @@ public:
 	}
 
 	//Add books
-	void addBook(const Book& book) {
-		books.push_back(book);
+	void addBook(Book& book) {
+		std::string proper_title = toProperCase(book.getTitle());
+		std::string proper_author = toProperCase(book.getAuthor());
+		int proper_year = book.getYear();
+
+		Book proper_case_book(proper_title, proper_author, proper_year);
+
+		books.push_back(proper_case_book);
 	}
 
 	/*void addBook(const Book& book1){
@@ -106,21 +146,22 @@ public:
 };
 
 int main() {
-	Book book1("The Fellowship of the Ring", "JRR Tolkien", 1954);
-	Book book2("The Two Towers", "JRR Tolkien", 1954);
-	Book book3("The Return of the King", "JRR Tolkien", 1955);
+	Book book1("The Fellowship of the Ring", "J.R.R. Tolkien", 1954);
+	Book book2("The Two Towers", "J.R.R. Tolkien", 1954);
+	Book book3("The Return of the King", "J.R.R. Tolkien", 1955);
+	Book book4("amSterDaM", "IaN mcEwan", 1998);
 
 	Library myLibrary;
 
 	myLibrary.addBook(book1);
 	myLibrary.addBook(book2);
 	myLibrary.addBook(book3);
+	myLibrary.addBook(book4);
 	myLibrary.listBooks();
 
 	myLibrary.removeBook("THE FELLOWSHIP OF THE RING");
 
 	myLibrary.listBooks();
-
 
 	return 0;
 }
